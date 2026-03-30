@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matti Wirtz | Projects & Contact</title>
+  <meta
+    name="description"
+    content="Discover Matti Wirtz's current projects and get in touch directly from this NFC landing page."
+  >
+  <style>
+    :root {
+      --bg: #f6efe5;
+      --surface: rgba(255, 252, 247, 0.82);
+      --surface-strong: rgba(255, 252, 247, 0.95);
+      --text: #1d2433;
+      --muted: #5e6677;
+      --line: rgba(29, 36, 51, 0.12);
+      --accent: #d85d37;
+      --accent-deep: #9d3114;
+      --accent-soft: #ffb389;
+      --accent-alt: #135d66;
+      --shadow: 0 24px 80px rgba(42, 32, 20, 0.16);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --max-width: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(216, 93, 55, 0.25), transparent 28%),
+        radial-gradient(circle at 90% 20%, rgba(19, 93, 102, 0.22), transparent 24%),
+        linear-gradient(145deg, #f8f1e8 0%, #efe2d4 52%, #f3eadf 100%);
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: auto;
+      border-radius: 999px;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(10px);
+    }
+
+    body::before {
+      width: 320px;
+      height: 320px;
+      right: -90px;
+      top: 140px;
+      background: rgba(255, 179, 137, 0.24);
+    }
+
+    body::after {
+      width: 260px;
+      height: 260px;
+      left: -70px;
+      bottom: 80px;
+      background: rgba(19, 93, 102, 0.14);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(var(--max-width), calc(100% - 32px));
+      margin: 0 auto;
+      padding: 24px 0 48px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.46);
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(140deg, rgba(255, 251, 245, 0.94), rgba(255, 245, 237, 0.84)),
+        linear-gradient(90deg, rgba(216, 93, 55, 0.08), rgba(19, 93, 102, 0.08));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -40px;
+      top: -60px;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle, rgba(216, 93, 55, 0.18), transparent 68%);
+      transform: rotate(16deg);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.56);
+      border: 1px solid rgba(29, 36, 51, 0.08);
+      color: var(--accent-deep);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.73rem;
+      font-weight: 800;
+    }
+
+    h1,
+    h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      letter-spacing: -0.03em;
+    }
+
+    h1 {
+      max-width: 11ch;
+      margin-top: 20px;
+      font-size: clamp(3rem, 8vw, 5.7rem);
+      line-height: 0.92;
+    }
+
+    .hero-copy {
+      max-width: 620px;
+      margin-top: 18px;
+      font-size: 1.08rem;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .hero-actions,
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .button,
+    .button-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+
+    .button {
+      background: linear-gradient(135deg, var(--accent), #ea7a53);
+      color: #fff9f6;
+      box-shadow: 0 16px 36px rgba(216, 93, 55, 0.26);
+    }
+
+    .button-secondary {
+      border: 1px solid rgba(29, 36, 51, 0.12);
+      background: rgba(255, 255, 255, 0.68);
+      color: var(--text);
+    }
+
+    .button:hover,
+    .button-secondary:hover,
+    .project-card:hover,
+    .contact-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .hero-stats {
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .stat {
+      min-width: 150px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.54);
+      border: 1px solid rgba(29, 36, 51, 0.08);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.4rem;
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .section {
+      margin-top: 22px;
+      padding: 32px;
+      border-radius: var(--radius-xl);
+      background: var(--surface);
+      border: 1px solid rgba(255, 255, 255, 0.54);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .section-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: end;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .section-header p {
+      margin: 8px 0 0;
+      max-width: 620px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .project-card,
+    .contact-card {
+      position: relative;
+      overflow: hidden;
+      padding: 22px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background: var(--surface-strong);
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+
+    .project-card {
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-card::after,
+    .contact-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -40px -50px auto;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 179, 137, 0.28), transparent 70%);
+      pointer-events: none;
+    }
+
+    .project-card:hover,
+    .contact-card:hover {
+      box-shadow: 0 18px 42px rgba(35, 28, 18, 0.12);
+      border-color: rgba(216, 93, 55, 0.24);
+    }
+
+    .project-tag {
+      display: inline-flex;
+      width: fit-content;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(216, 93, 55, 0.1);
+      color: var(--accent-deep);
+      font-size: 0.79rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .project-card h3 {
+      margin: 18px 0 12px;
+      font-size: 1.55rem;
+      line-height: 1.1;
+    }
+
+    .project-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .project-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(29, 36, 51, 0.08);
+    }
+
+    .project-url {
+      color: var(--accent-alt);
+      font-size: 0.95rem;
+      font-weight: 700;
+      word-break: break-word;
+    }
+
+    .arrow-link {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(19, 93, 102, 0.12), rgba(19, 93, 102, 0.22));
+      font-size: 1.15rem;
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 18px;
+    }
+
+    .contact-card strong {
+      display: inline-block;
+      margin-bottom: 16px;
+      color: var(--accent-deep);
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .contact-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .contact-list {
+      margin-top: 20px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .contact-pill {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 999px;
+      background: rgba(19, 93, 102, 0.08);
+      color: var(--accent-alt);
+      font-weight: 700;
+    }
+
+    .form-card {
+      padding: 22px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background: var(--surface-strong);
+    }
+
+    form {
+      display: grid;
+      gap: 14px;
+    }
+
+    label {
+      display: grid;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 0.96rem;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 15px 16px;
+      border: 1px solid rgba(29, 36, 51, 0.14);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text);
+      font: inherit;
+      transition: border-color 160ms ease, box-shadow 160ms ease;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: rgba(216, 93, 55, 0.58);
+      box-shadow: 0 0 0 4px rgba(216, 93, 55, 0.12);
+    }
+
+    textarea {
+      min-height: 170px;
+      resize: vertical;
+    }
+
+    .helper {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.93rem;
+      line-height: 1.6;
+    }
+
+    .mail-preview {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(29, 36, 51, 0.04);
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      word-break: break-word;
+    }
+
+    .site-footer {
+      margin-top: 18px;
+      padding: 12px 8px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      animation: rise 800ms ease forwards;
+    }
+
+    .fade-in.delay-1 { animation-delay: 90ms; }
+    .fade-in.delay-2 { animation-delay: 180ms; }
+    .fade-in.delay-3 { animation-delay: 270ms; }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 980px) {
+      .projects-grid,
+      .contact-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero,
+      .section {
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        width: min(100% - 18px, var(--max-width));
+        padding-top: 12px;
+        padding-bottom: 32px;
+      }
+
+      .hero,
+      .section {
+        padding: 20px;
+        border-radius: 24px;
+      }
+
+      h1 {
+        max-width: none;
+        font-size: clamp(2.55rem, 14vw, 4rem);
+      }
+
+      .project-card,
+      .form-card,
+      .contact-card {
+        padding: 18px;
+      }
+
+      .project-footer {
+        align-items: start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero fade-in">
+      <span class="eyebrow">NFC Landing Page</span>
+      <h1>Scan once. Reach everything.</h1>
+      <p class="hero-copy">
+        Matti Wirtz
+        <br>
+        Current projects and a quick way to get in touch.
+      </p>
+      <div class="hero-actions">
+        <a class="button" href="#projects">Explore projects</a>
+        <a class="button-secondary" href="#contact">Send a message</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <strong>3</strong>
+          <span>Projects</span>
+        </div>
+        <div class="stat">
+          <strong>1 tap</strong>
+          <span>Quick access</span>
+        </div>
+        <div class="stat">
+          <strong>Direct</strong>
+          <span>Easy contact</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section fade-in delay-1" id="projects">
+      <div class="section-header">
+        <div>
+          <span class="eyebrow">Projects</span>
+          <h2>Current projects</h2>
+        </div>
+        <p>Open any project below.</p>
+      </div>
+
+      <div class="projects-grid">
+        <a class="project-card" href="https://rescue-rush.lu" target="_blank" rel="noreferrer">
+          <div>
+            <span class="project-tag">Project</span>
+            <h3>Rescue Rush</h3>
+            <p>Fast access to Rescue Rush.</p>
+          </div>
+          <div class="project-footer">
+            <span class="project-url">rescue-rush.lu</span>
+            <span class="arrow-link" aria-hidden="true">↗</span>
+          </div>
+        </a>
+
+        <a class="project-card" href="https://garde.lu" target="_blank" rel="noreferrer">
+          <div>
+            <span class="project-tag">Project</span>
+            <h3>Garde.lu</h3>
+            <p>Open Garde.</p>
+          </div>
+          <div class="project-footer">
+            <span class="project-url">garde.lu</span>
+            <span class="arrow-link" aria-hidden="true">↗</span>
+          </div>
+        </a>
+
+        <a class="project-card" href="https://ambulance.wirtz.click" target="_blank" rel="noreferrer">
+          <div>
+            <span class="project-tag">Project</span>
+            <h3>Ambulance</h3>
+            <p>Tools and resources at ambulance.wirtz.click.</p>
+          </div>
+          <div class="project-footer">
+            <span class="project-url">ambulance.wirtz.click</span>
+            <span class="arrow-link" aria-hidden="true">↗</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="section fade-in delay-2" id="contact">
+      <div class="section-header">
+        <div>
+          <span class="eyebrow">Contact</span>
+          <h2>Send me a message</h2>
+        </div>
+        <p>Write a subject and message, then open your email app.</p>
+      </div>
+
+      <div class="contact-layout">
+        <div class="contact-card">
+          <strong>Get in touch</strong>
+          <p>If you would like to reach me, send a message here.</p>
+        </div>
+
+        <div class="form-card">
+          <form id="contact-form">
+            <label for="subject">
+              Subject
+              <input id="subject" name="subject" type="text" placeholder="What would you like to talk about?" required>
+            </label>
+
+            <label for="message">
+              Message
+              <textarea id="message" name="message" placeholder="Write your message here..." required></textarea>
+            </label>
+
+            <a class="button" id="send-link" href="mailto:hello@example.com?subject=&body=">
+              Send message
+            </a>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <p class="site-footer fade-in delay-3">
+      Matti Wirtz
+    </p>
+  </main>
+
+  <script>
+    const recipientEmail = "hello@example.com";
+    const form = document.getElementById("contact-form");
+    const subjectInput = document.getElementById("subject");
+    const messageInput = document.getElementById("message");
+    const sendLink = document.getElementById("send-link");
+
+    function buildMailtoLink() {
+      const subject = subjectInput.value.trim();
+      const message = messageInput.value.trim();
+      const body = message ? message : "";
+      const params = new URLSearchParams();
+
+      if (subject) {
+        params.set("subject", subject);
+      }
+
+      if (body) {
+        params.set("body", body);
+      }
+
+      const query = params.toString();
+      const mailtoLink = query
+        ? `mailto:${recipientEmail}?${query}`
+        : `mailto:${recipientEmail}`;
+
+      sendLink.href = mailtoLink;
+    }
+
+    subjectInput.addEventListener("input", buildMailtoLink);
+    messageInput.addEventListener("input", buildMailtoLink);
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      buildMailtoLink();
+      window.location.href = sendLink.href;
+    });
+
+    sendLink.addEventListener("click", buildMailtoLink);
+
+    buildMailtoLink();
+  </script>
+</body>
+</html>
